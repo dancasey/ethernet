@@ -1,0 +1,52 @@
+{
+  "name": "ethernet",
+  "version": "0.0.0",
+  "description": "Decodes Ethernet headers",
+  "main": "dist/ethernet.js",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "nyc ava",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dancasey/ethernet.git"
+  },
+  "keywords": [
+    "Ethernet",
+    "decode",
+    "headers"
+  ],
+  "author": "Dan Casey <dc181@icloud.com> (https://github.com/dancasey)",
+  "license": "PDDL-1.0",
+  "bugs": {
+    "url": "https://github.com/dancasey/ethernet/issues"
+  },
+  "homepage": "https://github.com/dancasey/ethernet#readme",
+  "types": "dist/ethernet.d.ts",
+  "ava": {
+    "files": [
+      "dist/test"
+    ],
+    "verbose": true
+  },
+  "nyc": {
+    "exclude": [
+      "node_modules",
+      "dist/test"
+    ],
+    "reporter": [
+      "text",
+      "text-summary",
+      "html"
+    ]
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^6.0.40",
+    "ava": "^0.16.0",
+    "nyc": "^8.3.0",
+    "typescript": "^2.0.3"
+  }
+}
