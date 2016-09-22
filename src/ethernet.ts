@@ -1,6 +1,6 @@
 export interface EthernetTCI {
   pcp: number;  // priority code point
-  dei: number; // drop eligible indicator
+  dei: number;  // drop eligible indicator
   vid: number;  // VLAN identifier
 }
 
@@ -26,9 +26,9 @@ const TPID_QinQ   = 0x9100;
 
 const decodeTCI = (tci: number): EthernetTCI => {
   return {
-    pcp: tci << 2,
-    dei: tci << 2,
-    vid: tci << 2,
+    pcp: (tci >> 13) & 0x7, // bits 14-16
+    dei: (tci >> 11) & 0x1, // bit 13
+    vid: tci & 0xfff,       // low 12 bits
   };
 };
 
