@@ -52,16 +52,10 @@ const decode = (data: string): EthernetHeader => {
   };
 
   if (result.ethertype === TPID_8021Q) {
-    if (data.length < 18 * 2) {
-      throw new Error("Frame header with tag must be at least 18 bytes");
-    }
     result.tag = decodeTag(data.substr(24, 8));
     result.ethertype = parseInt(data.substr(32, 4), 16);
     result.payload = data.substring(36);
   } else if (result.ethertype === TPID_8021ad || result.ethertype === TPID_QinQ) {
-    if (data.length < 22 * 2) {
-      throw new Error("Frame header with double tag must be at least 22 bytes");
-    }
     result.stag = decodeTag(data.substr(24, 8));
     result.ctag = decodeTag(data.substr(32, 8));
     result.ethertype = parseInt(data.substr(40, 4), 16);

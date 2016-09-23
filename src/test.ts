@@ -9,6 +9,8 @@ c4710800139a2a34000057e4247f0007\
 161718191a1b1c1d1e1f202122232425\
 262728292a2b2c2d2e2f303132333435\
 3637";
+const shortFrame = "01020304";
+const badFrame = "0102030405060708091011121314150g17";
 const tagFrame = "\
 0102030405060a0b0c0d0e0f8100001008004500\
 00541ecd0000400141e30a00010b4a7d\
@@ -25,8 +27,6 @@ c4710800139a2a34000057e4247f0007\
 161718191a1b1c1d1e1f202122232425\
 262728292a2b2c2d2e2f303132333435\
 3637";
-const short01 = "01020304";
-const bad01 = "0102030405060708091011121314150g17";
 
 test("decodes from string", t => {
   let f = decode(plainFrame);
@@ -85,13 +85,13 @@ test("decodes 802.1ad tag", t => {
 });
 
 test("throws on short string", t => {
-  t.throws(() => decode(short01));
+  t.throws(() => decode(shortFrame));
 });
 
 test("throws on short buffer", t => {
-  t.throws(() => decode(Buffer.from(short01, "hex")));
+  t.throws(() => decode(Buffer.from(shortFrame, "hex")));
 });
 
 test("throws on bad string", t => {
-  t.throws(() => decode(bad01));
+  t.throws(() => decode(badFrame));
 });
