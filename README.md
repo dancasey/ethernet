@@ -1,6 +1,7 @@
 # ethernet
 
 [![Build Status](https://travis-ci.org/dancasey/ethernet.svg?branch=master)](https://travis-ci.org/dancasey/ethernet)
+[![codecov](https://codecov.io/gh/dancasey/ethernet/branch/master/graph/badge.svg)](https://codecov.io/gh/dancasey/ethernet)
 
 **Decodes Ethernet headers**
 
