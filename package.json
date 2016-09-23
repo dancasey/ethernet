@@ -35,6 +35,10 @@
     "exclude": [
       "node_modules",
       "dist/test.js"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
     ]
   },
   "devDependencies": {
