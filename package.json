@@ -1,6 +1,6 @@
 {
   "name": "ethernet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Decodes Ethernet headers",
   "main": "dist/ethernet.js",
   "scripts": {
@@ -25,6 +25,9 @@
   },
   "homepage": "https://github.com/dancasey/ethernet#readme",
   "types": "dist/ethernet.d.ts",
+  "files": [
+    "dist"
+  ],
   "ava": {
     "files": [
       "dist/test.js"
