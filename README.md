@@ -1,5 +1,7 @@
 # ethernet
 
+[![Build Status](https://travis-ci.org/dancasey/ethernet.svg?branch=master)](https://travis-ci.org/dancasey/ethernet)
+
 **Decodes Ethernet headers**
 
 Supports:

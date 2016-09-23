@@ -1,6 +1,6 @@
 {
   "name": "ethernet",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Decodes Ethernet headers",
   "main": "dist/ethernet.js",
   "scripts": {
@@ -37,7 +37,6 @@
       "dist/test.js"
     ]
   },
-  "private": true,
   "devDependencies": {
     "@types/node": "^6.0.40",
     "ava": "^0.16.0",
