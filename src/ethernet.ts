@@ -34,8 +34,8 @@ const decodeTCI = (tci: number): EthernetTCI => {
 
 const decodeTag = (data: string): EthernetTag => {
   return {
-    tpid: parseInt(data.substr(0, 2), 16),
-    tci: decodeTCI(parseInt(data.substr(2, 2), 16)),
+    tpid: parseInt(data.substr(0, 4), 16),
+    tci: decodeTCI(parseInt(data.substr(4, 4), 16)),
   };
 };
 
@@ -45,27 +45,27 @@ const decode = (data: string): EthernetHeader => {
   }
 
   let result: EthernetHeader = {
-    destination: data.substr(0, 6),
-    source: data.substr(6, 6),
-    ethertype: parseInt(data.substr(12, 2), 16),
-    payload: data.substring(14),
+    destination: data.substr(0, 12),
+    source: data.substr(12, 12),
+    ethertype: parseInt(data.substr(24, 4), 16),
+    payload: data.substring(28),
   };
 
   if (result.ethertype === TPID_8021Q) {
     if (data.length < 18 * 2) {
       throw new Error("Frame header with tag must be at least 18 bytes");
     }
-    result.tag = decodeTag(data.substr(12, 4));
-    result.ethertype = parseInt(data.substr(16, 2), 16);
-    result.payload = data.substring(18);
+    result.tag = decodeTag(data.substr(24, 8));
+    result.ethertype = parseInt(data.substr(32, 4), 16);
+    result.payload = data.substring(36);
   } else if (result.ethertype === TPID_8021ad || result.ethertype === TPID_QinQ) {
     if (data.length < 22 * 2) {
       throw new Error("Frame header with double tag must be at least 22 bytes");
     }
-    result.stag = decodeTag(data.substr(12, 4));
-    result.ctag = decodeTag(data.substr(16, 4));
-    result.ethertype = parseInt(data.substr(20, 2), 16);
-    result.payload = data.substring(22);
+    result.stag = decodeTag(data.substr(24, 8));
+    result.ctag = decodeTag(data.substr(32, 8));
+    result.ethertype = parseInt(data.substr(40, 4), 16);
+    result.payload = data.substring(44);
   }
 
   return result;
@@ -78,6 +78,9 @@ const decode = (data: string): EthernetHeader => {
  */
 const ethernet = (frame: string | Buffer): EthernetHeader => {
   if (typeof frame === "string") {
+    if (!/^([A-Fa-f0-9]{2})+$/.test(frame)) {
+      throw new TypeError("Frame must be hex string or Buffer");
+    }
     return decode(frame);
   } else if (typeof Buffer !== undefined && Buffer.isBuffer(frame)) {
     return decode(frame.toString("hex"));

@@ -27,19 +27,14 @@
   "types": "dist/ethernet.d.ts",
   "ava": {
     "files": [
-      "dist/test"
+      "dist/test.js"
     ],
     "verbose": true
   },
   "nyc": {
     "exclude": [
       "node_modules",
-      "dist/test"
-    ],
-    "reporter": [
-      "text",
-      "text-summary",
-      "html"
+      "dist/test.js"
     ]
   },
   "private": true,
